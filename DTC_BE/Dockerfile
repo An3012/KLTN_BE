@@ -1,5 +1,5 @@
-﻿# 1. Image .NET SDK để build app
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+﻿# 1. Image .NET SDK để build app (sử dụng .NET SDK 8.0)
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
 # 2. Copy file .csproj và restore dependencies
@@ -11,7 +11,7 @@ COPY . ./
 RUN dotnet publish -c Release -o /app/publish
 
 # 4. Image ASP.NET để chạy app
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS runtime
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
 COPY --from=build /app/publish .
 
